@@ -163,3 +163,21 @@ leaflet(aeroport_localisation) %>%
   addTiles()
 
 
+
+mois<- 1
+year <- 2019
+
+palette <- c("green", "blue", "red")
+
+
+rm(trafic_aeroports)
+
+trafic_date<-pax_apt_all %>% filter(an=="2020" & mois=="3") 
+
+trafic_aeroports<-airports_location%>% inner_join(trafic_date$,by=c("Code.OACI"="apt"))
+
+data(quakes)
+
+# Show first 20 rows from the `quakes` dataset
+leaflet(data = trafic_aeroports) %>% addTiles() %>%
+  addMarkers(~long, ~lat, popup = ~as.character(mag), label = ~as.character(mag))
